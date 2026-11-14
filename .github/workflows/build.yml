@@ -9,8 +9,16 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout original source
         uses: actions/checkout@v4
+        with:
+          repository: Bytecode745/Violation-Reader
+          ref: main
+
+      - name: Check project files
+        shell: pwsh
+        run: |
+          Get-ChildItem -Recurse -Filter *.sln
 
       - name: Set up MSBuild
         uses: microsoft/setup-msbuild@v2
@@ -23,5 +31,6 @@ jobs:
         with:
           name: Violation-Reader-Windows
           path: |
+            **/Release/*.exe
             **/Release/**/*.exe
-            **/x64/Release/*.exe
+          if-no-files-found: error
