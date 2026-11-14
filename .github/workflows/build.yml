@@ -18,13 +18,13 @@ jobs:
       - name: Check project files
         shell: pwsh
         run: |
-          Get-ChildItem -Recurse -Filter *.sln
+          Get-ChildItem -Recurse -Filter *.slnx
 
       - name: Set up MSBuild
         uses: microsoft/setup-msbuild@v2
 
       - name: Build Release
-        run: msbuild Violations.sln /p:Configuration=Release /p:Platform=x64 /m
+        run: msbuild Violations.slnx /p:Configuration=Release /p:Platform=x64 /m
 
       - name: Upload EXE
         uses: actions/upload-artifact@v4
